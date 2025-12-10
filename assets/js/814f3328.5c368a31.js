@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkmy_website=globalThis.webpackChunkmy_website||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"About the Author: Muhammad Waheed","permalink":"/hackathon_textbook_ai_robotics/blog/2025/12/10/about-muhammad-waheed","unlisted":false,"date":"2025-12-10T00:00:00.000Z"}]}')}}]);
