@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Introduction to AI-Native Textbook — Physical AI & Humanoid Robotics
+# Introduction to AI-Native Textbook  Physical AI & Humanoid Robotics
 
 Welcome to the **AI-Native Textbook for Physical AI & Humanoid Robotics**, a comprehensive 13-week curriculum designed to guide you through the cutting-edge intersection of artificial intelligence and robotics.
 
