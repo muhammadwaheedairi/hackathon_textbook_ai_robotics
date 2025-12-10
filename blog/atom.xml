@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/blog</id>
-    <title>AI-Native Textbook — Physical AI &amp; Humanoid Robotics Blog</title>
+    <title>AI-Native Textbook Physical AI &amp; Humanoid Robotics Blog</title>
     <updated>2025-12-10T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/blog"/>
-    <subtitle>AI-Native Textbook — Physical AI &amp; Humanoid Robotics Blog</subtitle>
+    <subtitle>AI-Native Textbook Physical AI &amp; Humanoid Robotics Blog</subtitle>
     <icon>https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[About the Author: Muhammad Waheed]]></title>
