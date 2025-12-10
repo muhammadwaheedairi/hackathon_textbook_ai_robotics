@@ -1,19 +1,19 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+author:
+  label: Author
+  permalink: /blog/tags/author
+  description: Posts about the author and their work
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+ai:
+  label: AI
+  permalink: /blog/tags/ai
+  description: Posts about Artificial Intelligence
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+robotics:
+  label: Robotics
+  permalink: /blog/tags/robotics
+  description: Posts about robotics and automation
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+education:
+  label: Education
+  permalink: /blog/tags/education
+  description: Posts about educational content and learning
