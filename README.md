@@ -35,7 +35,7 @@ A comprehensive textbook covering ROS 2, Gazebo, NVIDIA Isaac, and Vision-Langua
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/muhammadwaheed/hackathon_textbook_ai_robotics.git
+   git clone https://github.com/muhammadwaheedairi/hackathon_textbook_ai_robotics.git
    ```
 
 2. Navigate to the website directory:

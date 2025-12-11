@@ -5,7 +5,7 @@ This guide provides a fast path to getting the AI-Native Textbook up and running
 ## For Readers
 
 ### Reading Online
-The textbook is deployed at: https://muhammadwaheed.github.io/hackathon_textbook_ai_robotics/
+The textbook is deployed at: https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/
 
 Simply visit the link to start reading the complete 13-week curriculum covering:
 - Module 1: The Robotic Nervous System (ROS 2)
@@ -16,7 +16,7 @@ Simply visit the link to start reading the complete 13-week curriculum covering:
 ### Reading Locally
 1. Clone the repository:
    ```bash
-   git clone https://github.com/muhammadwaheed/hackathon_textbook_ai_robotics.git
+   git clone https://github.com/muhammadwaheedairi/hackathon_textbook_ai_robotics.git
    ```
 
 2. Navigate to the website directory:
