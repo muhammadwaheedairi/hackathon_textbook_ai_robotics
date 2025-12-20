@@ -1,0 +1,126 @@
+# Search API Contract
+
+## Search Functionality
+
+### Search Request
+```
+POST /api/search
+```
+
+**Request Body:**
+```json
+{
+  "query": {
+    "type": "string",
+    "required": true,
+    "minLength": 1,
+    "maxLength": 200,
+    "description": "The search term to look for in textbook content"
+  },
+  "options": {
+    "type": "object",
+    "properties": {
+      "caseSensitive": {
+        "type": "boolean",
+        "default": false,
+        "description": "Whether to perform case-sensitive matching"
+      },
+      "partialMatch": {
+        "type": "boolean",
+        "default": true,
+        "description": "Whether to enable partial matching"
+      }
+    }
+  }
+}
+```
+
+**Client-side Implementation Notes:**
+- This represents the internal API contract for the search functionality
+- No actual HTTP request is made; this is for documenting the interface
+- Search runs client-side on static content
+
+### Search Response
+```json
+{
+  "results": {
+    "type": "object",
+    "properties": {
+      "matches": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The matching content excerpt"
+            },
+            "highlightedContent": {
+              "type": "string",
+              "description": "The content with highlighted search terms"
+            },
+            "location": {
+              "type": "object",
+              "properties": {
+                "elementId": {
+                  "type": "string",
+                  "description": "ID of the DOM element containing the match"
+                },
+                "pageTitle": {
+                  "type": "string",
+                  "description": "Title of the page containing the match"
+                }
+              }
+            }
+          }
+        }
+      },
+      "totalCount": {
+        "type": "number",
+        "description": "Total number of matches found"
+      },
+      "searchTerm": {
+        "type": "string",
+        "description": "The original search term"
+      }
+    }
+  }
+}
+```
+
+## Highlight Functionality
+
+### Highlight Request
+```
+POST /api/highlight
+```
+
+**Request Body:**
+```json
+{
+  "content": {
+    "type": "string",
+    "required": true,
+    "description": "The content to highlight search terms in"
+  },
+  "searchTerm": {
+    "type": "string",
+    "required": true,
+    "description": "The search term to highlight"
+  }
+}
+```
+
+### Highlight Response
+```json
+{
+  "highlightedContent": {
+    "type": "string",
+    "description": "The content with highlighted search terms wrapped in HTML span elements"
+  },
+  "matchCount": {
+    "type": "number",
+    "description": "Number of highlighted terms in the content"
+  }
+}
+```
