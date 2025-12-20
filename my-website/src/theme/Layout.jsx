@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import OriginalLayout from '@theme-original/Layout';
 import SearchBar from '@site/src/components/SearchBar/SearchBar';
+import RagChatbot from '@site/src/components/RagChatbot/RagChatbot';
 import { SearchProvider } from '@site/src/contexts/SearchContext';
 import '@site/src/css/search-styles.css';
+import '@site/src/css/floating-chatbot.css';
 
-// Custom Layout wrapper to add search functionality
+// Custom Layout wrapper to add search functionality and floating chatbot
 const Layout = (props) => {
+  const [isChatbotVisible, setIsChatbotVisible] = useState(false);
+
+  const toggleChatbot = () => {
+    setIsChatbotVisible(!isChatbotVisible);
+  };
+
+  const closeChatbot = () => {
+    setIsChatbotVisible(false);
+  };
+
   return (
     <SearchProvider>
       <OriginalLayout {...props}>
@@ -25,6 +37,33 @@ const Layout = (props) => {
           </div>
         </div>
         {props.children}
+
+        {/* Floating chatbot button */}
+        <button
+          className="floating-chatbot-button"
+          onClick={toggleChatbot}
+          aria-label={isChatbotVisible ? "Close chatbot" : "Open chatbot"}
+          aria-expanded={isChatbotVisible}
+        >
+          💬
+        </button>
+
+        {/* Floating chatbot container */}
+        <div
+          className={`floating-chatbot-container ${isChatbotVisible ? 'visible' : ''}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="RAG Chatbot Interface"
+        >
+          <button
+            className="floating-chatbot-close"
+            onClick={closeChatbot}
+            aria-label="Close chatbot"
+          >
+            ×
+          </button>
+          <RagChatbot />
+        </div>
       </OriginalLayout>
     </SearchProvider>
   );
