@@ -212,6 +212,15 @@ See `.specify/memory/constitution.md` for code quality, testing, performance, se
 ## Active Technologies
 - Markdown for content, JavaScript/Node.js for Docusaurus configuration (Node.js 18+ LTS) + Docusaurus 3.x, React, GitHub Pages plugin, GitHub Actions (001-ai-textbook-physical-ai)
 - File-based (Markdown files in docs/ directory, static assets in static/ directory) (001-ai-textbook-physical-ai)
+- JavaScript/TypeScript for Docusaurus configuration (Node.js 18+ LTS) + React 18.x + Docusaurus 3.x, React, ReactDOM, Debounce utilities (lodash or custom implementation) (001-textbook-search)
+- N/A (client-side search on static content) (001-textbook-search)
+- Python 3.11+ (required for FastAPI and async operations) + FastAPI, OpenAI SDK, Qdrant-client, Pydantic, uvicorn, python-dotenv (002-rag-chatbot)
+- Qdrant Cloud (vector database for embeddings), Redis (optional session storage) (002-rag-chatbot)
+- Python 3.11+ (consistent with existing backend) + qdrant-client, cohere, requests, beautifulsoup4, pytest (003-rag-retrieval-testing)
+- Qdrant vector database (existing cloud instance) (003-rag-retrieval-testing)
+- JavaScript/TypeScript (compatible with Docusaurus 3.x), React 18.x + React, Docusaurus 3.x, axios/fetch for API calls, debounce utilities (lodash or custom implementation) (001-rag-chatbot-frontend)
+- N/A (client-side only, no persistent storage required) (001-rag-chatbot-frontend)
+- JavaScript/TypeScript (compatible with Docusaurus 3.x), Python 3.11+ for backend + React 18.x (Docusaurus dependency), axios/fetch for API calls, debounce utilities (lodash or custom implementation), existing FastAPI backend (004-rag-agent-frontend-integration)
 
 ## Recent Changes
 - 001-ai-textbook-physical-ai: Added Markdown for content, JavaScript/Node.js for Docusaurus configuration (Node.js 18+ LTS) + Docusaurus 3.x, React, GitHub Pages plugin, GitHub Actions

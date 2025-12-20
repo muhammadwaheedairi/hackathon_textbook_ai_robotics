@@ -4,6 +4,13 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// Define environment variables to pass to the client
+const siteConfig = {
+  // Get environment variables - only pass the ones we want to expose to the client
+  RAG_API_URL: process.env.REACT_APP_RAG_API_URL || 'http://localhost:8000',
+  NODE_ENV: process.env.NODE_ENV || 'development',
+};
+
 const config: Config = {
   title: 'AI-Native Textbook Physical AI & Humanoid Robotics',
   tagline: 'A comprehensive textbook covering ROS 2, Gazebo, NVIDIA Isaac, and Vision-Language-Action systems',
@@ -152,6 +159,11 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+    },
+    // Custom fields to pass environment variables to the client
+    customFields: {
+      RAG_API_URL: siteConfig.RAG_API_URL,
+      NODE_ENV: siteConfig.NODE_ENV,
     },
   } satisfies Preset.ThemeConfig,
 };

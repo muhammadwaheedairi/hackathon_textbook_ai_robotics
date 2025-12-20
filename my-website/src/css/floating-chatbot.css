@@ -1,0 +1,139 @@
+/* Floating chatbot button styles */
+.floating-chatbot-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.floating-chatbot-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: var(--ifm-color-primary-dark);
+}
+
+.floating-chatbot-button:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.floating-chatbot-button:active {
+  transform: scale(0.95);
+}
+
+/* Chatbot container styles */
+.floating-chatbot-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  max-width: 400px;
+  width: calc(100% - 40px);
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.floating-chatbot-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Close button for the chatbot */
+.floating-chatbot-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--ifm-color-emphasis-700);
+  padding: 5px;
+  border-radius: 4px;
+  z-index: 1001;
+}
+
+.floating-chatbot-close:hover {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .floating-chatbot-container {
+    width: calc(100% - 40px);
+    max-width: none;
+    max-height: 60vh;
+    bottom: 80px;
+  }
+
+  .floating-chatbot-button {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-chatbot-container {
+    width: calc(100% - 20px);
+    left: 10px;
+    right: 10px;
+    max-height: 50vh;
+  }
+
+  .floating-chatbot-button {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .floating-chatbot-button {
+    border: 2px solid var(--ifm-color-emphasis-0);
+  }
+
+  .floating-chatbot-container {
+    border: 2px solid var(--ifm-color-emphasis-0);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .floating-chatbot-button,
+  .floating-chatbot-container {
+    transition: none;
+  }
+
+  .floating-chatbot-button:hover {
+    transform: none;
+  }
+
+  .floating-chatbot-button:active {
+    transform: none;
+  }
+}

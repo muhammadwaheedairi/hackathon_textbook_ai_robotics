@@ -1,0 +1,680 @@
+/* Container for the entire RagChatbot component */
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 1rem auto;
+  padding: 1.25rem;
+  font-family: var(--ifm-font-family-base);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  background-color: var(--ifm-color-emphasis-0);
+  box-sizing: border-box;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Input label styling - removed since we're removing redundant text */
+.inputLabel {
+  display: none; /* Hidden since we're removing redundant instruction text */
+}
+
+/* Form styling */
+.form {
+  margin-bottom: 1.25rem;
+}
+
+/* Input container with textarea and submit button */
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  align-items: stretch;
+}
+
+/* Textarea styling */
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: var(--ifm-font-family-base);
+  resize: vertical;
+  min-height: 90px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  max-height: 200px;
+  background-color: white;
+  color: var(--ifm-color-emphasis-900);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px var(--ifm-color-primary-lighter);
+  transform: translateY(-1px);
+}
+
+.textarea:disabled {
+  background-color: var(--ifm-color-emphasis-100);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Submit button styling - enhanced for better visibility */
+.submitButton {
+  align-self: flex-end;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-darker) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: var(--ifm-font-family-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  height: fit-content;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--ifm-color-primary-darker) 0%, var(--ifm-color-primary-darkest) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton:disabled {
+  background: var(--ifm-color-emphasis-300);
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Validation feedback styling */
+.validationFeedback {
+  color: var(--ifm-color-warning-dark);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--ifm-color-warning-background);
+  border: 1px solid var(--ifm-color-warning-light);
+  border-radius: 6px;
+  word-break: break-word;
+  border-left: 4px solid var(--ifm-color-warning);
+}
+
+/* Error message styling */
+.error {
+  color: var(--ifm-color-danger-contrast-background);
+  padding: 1rem;
+  background-color: var(--ifm-color-danger-background);
+  border: 1px solid var(--ifm-color-danger-light);
+  border-radius: 8px;
+  margin-top: 1rem;
+  border-left: 4px solid var(--ifm-color-danger);
+  word-break: break-word;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.errorContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.retryButton {
+  background: linear-gradient(135deg, var(--ifm-color-success) 0%, var(--ifm-color-success-darker) 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  align-self: flex-start;
+  min-width: 80px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.retryButton:hover {
+  background: linear-gradient(135deg, var(--ifm-color-success-darker) 0%, var(--ifm-color-success-darkest) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.retryButton:active {
+  transform: translateY(0);
+}
+
+/* No answer/empty state styling */
+.noAnswer {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  margin-top: 1rem;
+  border-left: 4px solid var(--ifm-color-warning);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.noAnswer h3 {
+  color: var(--ifm-color-warning-dark);
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.noAnswer p {
+  margin: 0.5rem 0;
+  color: var(--ifm-color-emphasis-800);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Loading indicator styling */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  background-color: var(--ifm-color-emphasis-50);
+  border-radius: 8px;
+  margin: 1rem 0;
+  position: relative;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid var(--ifm-color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+/* Skeleton loading styles for better perceived performance */
+.skeletonContainer {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--ifm-color-emphasis-0);
+  border-radius: 8px;
+  box-sizing: border-box;
+  border: 1px solid var(--ifm-color-emphasis-100);
+}
+
+.skeletonHeader {
+  height: 1.4rem;
+  width: 40%;
+  background: linear-gradient(90deg, var(--ifm-color-emphasis-200), var(--ifm-color-emphasis-100), var(--ifm-color-emphasis-200));
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  margin-bottom: 0.75rem;
+  border-radius: 4px;
+}
+
+.skeletonText {
+  height: 1rem;
+  width: 100%;
+  background: linear-gradient(90deg, var(--ifm-color-emphasis-200), var(--ifm-color-emphasis-100), var(--ifm-color-emphasis-200));
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.skeletonText:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.skeletonText:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.skeletonSources {
+  margin-top: 1rem;
+}
+
+.skeletonSource {
+  height: 1rem;
+  width: 100%;
+  background: linear-gradient(90deg, var(--ifm-color-emphasis-200), var(--ifm-color-emphasis-100), var(--ifm-color-emphasis-200));
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.skeletonSource:last-child {
+  animation-delay: 0.6s;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Results container styling - Add scrolling for long content */
+.results {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.25rem;
+  background-color: white;
+  margin-top: 1rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Answer section styling */
+.answer {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.answerHeader {
+  color: var(--ifm-color-primary-darker);
+  margin-bottom: 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.answerText {
+  line-height: 1.7;
+  color: var(--ifm-color-emphasis-900);
+  font-size: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Sources section styling */
+.sources {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.sources h3,
+.chunks h3 {
+  color: var(--ifm-color-primary-darker);
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.sourcesList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sourceItem {
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
+  background-color: var(--ifm-color-emphasis-0);
+  border-radius: 6px;
+  border-left: 3px solid var(--ifm-color-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  transition: box-shadow 0.2s ease;
+}
+
+.sourceItem:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.sourceLink {
+  color: var(--ifm-color-primary-darker);
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-all;
+  display: block;
+  font-size: 0.9rem;
+}
+
+.sourceLink:hover {
+  text-decoration: underline;
+  color: var(--ifm-color-primary-darkest);
+}
+
+/* Chunks section styling */
+.chunks {
+  margin-bottom: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.chunk {
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  background-color: var(--ifm-color-emphasis-0);
+  border-radius: 8px;
+  border-left: 3px solid var(--ifm-color-secondary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.chunk:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.chunkContent {
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-900);
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.chunkMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-800);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  word-wrap: break-word;
+}
+
+.chunkSource {
+  color: var(--ifm-color-secondary-darker);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  background-color: var(--ifm-color-emphasis-100);
+  font-size: 0.85rem;
+  word-break: break-all;
+  transition: all 0.2s ease;
+}
+
+.chunkSource:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
+.similarityScore {
+  font-weight: 600;
+  color: var(--ifm-color-success-darker);
+  background-color: var(--ifm-color-success-background);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  border: 1px solid var(--ifm-color-success-light);
+}
+
+/* Mobile responsive design */
+@media (max-width: 480px) {
+  .container {
+    margin: 0.75rem auto;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .inputLabel {
+    display: none; /* Keep hidden on mobile too */
+  }
+
+  .textarea {
+    font-size: 0.9rem;
+    min-height: 80px;
+    padding: 0.8rem;
+  }
+
+  .submitButton {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    min-width: 85px;
+    align-self: stretch; /* Full width on mobile */
+    text-align: center;
+  }
+
+  .errorContent {
+    align-items: stretch;
+  }
+
+  .retryButton {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .answerHeader {
+    font-size: 1.1rem;
+  }
+
+  .answerText {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .sources h3,
+  .chunks h3 {
+    font-size: 1rem;
+  }
+
+  .chunk {
+    padding: 1rem;
+  }
+
+  .chunkContent {
+    font-size: 0.9rem;
+  }
+
+  .results {
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  .inputContainer {
+    gap: 0.5rem;
+  }
+}
+
+/* Tablet responsive design */
+@media (min-width: 481px) and (max-width: 767px) {
+  .container {
+    margin: 1rem auto;
+    padding: 1.25rem;
+  }
+
+  .inputLabel {
+    display: none; /* Keep hidden */
+  }
+
+  .textarea {
+    font-size: 0.95rem;
+    min-height: 85px;
+  }
+
+  .answerText {
+    font-size: 1rem;
+  }
+
+  .chunk {
+    padding: 1.1rem;
+  }
+
+  .chunkContent {
+    font-size: 0.95rem;
+  }
+}
+
+/* Desktop responsive design */
+@media (min-width: 768px) {
+  .container {
+    max-width: 800px;
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+  }
+
+  .inputContainer {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem; /* Increased gap for better spacing */
+  }
+
+  .inputLabel {
+    display: none; /* Keep hidden as per our design */
+  }
+
+  .textarea {
+    flex: 1;
+    min-height: auto;
+    min-width: 220px;
+    font-size: 0.95rem;
+  }
+
+  .submitButton {
+    align-self: flex-end;
+    margin-top: 0;
+    padding: 0.75rem 1.5rem; /* Maintain consistent padding */
+  }
+
+  .errorContent {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .retryButton {
+    align-self: flex-start;
+  }
+
+  .chunkMeta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .answerText {
+    font-size: 1.05rem;
+  }
+
+  .results {
+    max-height: 70vh;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 900px;
+    padding: 2rem;
+    margin: 2rem auto;
+  }
+
+  .answerText {
+    font-size: 1.1rem;
+  }
+
+  .chunk {
+    padding: 1.25rem;
+  }
+
+  .results {
+    max-height: 75vh;
+  }
+}
+
+/* Focus styles for accessibility */
+textarea:focus,
+button:focus,
+a:focus {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .container {
+    border-width: 2px;
+    border-color: CanvasText;
+  }
+
+  .textarea {
+    border-width: 2px;
+    border-color: CanvasText;
+    color: CanvasText;
+    background-color: Canvas;
+  }
+
+  .results {
+    border-width: 2px;
+    border-color: CanvasText;
+  }
+
+  .answerText,
+  .chunkContent {
+    color: CanvasText;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+
+  .chunk,
+  .retryButton,
+  .submitButton {
+    transition: none;
+  }
+
+  .chunk:hover,
+  .chunkSource:hover,
+  .sourceItem:hover {
+    transform: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+}
+
+

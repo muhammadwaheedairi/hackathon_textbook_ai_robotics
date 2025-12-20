@@ -1,0 +1,199 @@
+openapi: 3.0.0
+info:
+  title: RAG Agent API
+  description: API for RAG Agent with document retrieval and question answering
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /ask:
+    post:
+      summary: Process a user query through the RAG agent
+      description: Submit a query to the RAG agent and receive an AI-generated answer with supporting evidence
+      operationId: askRag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+            example:
+              query: "What is ROS2 and how does it differ from ROS1?"
+      responses:
+        '200':
+          description: Successful response with answer and supporting information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+              example:
+                answer: "ROS2 (Robot Operating System 2) is the next generation of the Robot Operating System framework..."
+                sources:
+                  - "https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/docs/ros2-intro"
+                  - "https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/docs/ros2-differences"
+                matched_chunks:
+                  - content: "ROS2 introduces a new architecture based on DDS (Data Distribution Service)..."
+                    url: "https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/docs/ros2-intro"
+                    position: 0
+                    similarity_score: 0.92
+                  - content: "The main differences between ROS1 and ROS2 include the communication layer..."
+                    url: "https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/docs/ros2-differences"
+                    position: 1
+                    similarity_score: 0.87
+                error: null
+                status: "success"
+                query_time_ms: 1250.5
+                confidence: "high"
+        '400':
+          description: Bad request - query validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+              example:
+                answer: ""
+                sources: []
+                matched_chunks: []
+                error: "Query cannot be empty"
+                status: "error"
+                query_time_ms: 0
+                confidence: null
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+              example:
+                answer: ""
+                sources: []
+                matched_chunks: []
+                error: "Internal server error occurred"
+                status: "error"
+                query_time_ms: 50.2
+                confidence: null
+
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Verify that the RAG Agent API is running and healthy
+      operationId: healthCheck
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: "healthy"
+                message: "RAG Agent API is running"
+
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The user's question to be answered
+          example: "Explain the key differences between ROS1 and ROS2"
+          minLength: 1
+          maxLength: 2000
+
+    QueryResponse:
+      type: object
+      required:
+        - answer
+        - sources
+        - matched_chunks
+        - status
+      properties:
+        answer:
+          type: string
+          description: The AI-generated answer to the user's question
+          example: "ROS2 introduces a new architecture based on DDS..."
+        sources:
+          type: array
+          description: URLs to the textbook sections that support the answer
+          items:
+            type: string
+            format: uri
+          example:
+            - "https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/docs/ros2-intro"
+            - "https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/docs/ros2-differences"
+        matched_chunks:
+          type: array
+          description: Text chunks from the textbook that were used as context
+          items:
+            $ref: '#/components/schemas/MatchedChunk'
+        error:
+          type: string
+          description: Error message if the request failed
+          example: "Query cannot be empty"
+          nullable: true
+        status:
+          type: string
+          description: Status of the request processing
+          enum: [success, error, empty]
+          example: "success"
+        query_time_ms:
+          type: number
+          description: Time taken to process the query in milliseconds
+          example: 1250.5
+          nullable: true
+        confidence:
+          type: string
+          description: Confidence level of the response
+          enum: [low, medium, high]
+          example: "high"
+          nullable: true
+
+    MatchedChunk:
+      type: object
+      required:
+        - content
+        - url
+        - position
+        - similarity_score
+      properties:
+        content:
+          type: string
+          description: The actual text content of the matched chunk
+          example: "ROS2 introduces a new architecture based on DDS (Data Distribution Service)..."
+        url:
+          type: string
+          format: uri
+          description: URL to the source document
+          example: "https://muhammadwaheedairi.github.io/hackathon_textbook_ai_robotics/docs/ros2-intro"
+        position:
+          type: integer
+          description: Position index of the chunk within the source
+          example: 0
+        similarity_score:
+          type: number
+          description: Relevance score from the retrieval system (0-1)
+          example: 0.92
+          minimum: 0
+          maximum: 1
+
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          description: Health status of the API
+          example: "healthy"
+        message:
+          type: string
+          description: Additional health information
+          example: "RAG Agent API is running"
