@@ -1,83 +1,11 @@
-// API Configuration for RAG Agent integration
-
-// Helper function to safely get environment variables in browser
-const getEnvVar = (name: string, defaultValue: string): string => {
-  // For Docusaurus, we access custom fields through window.__APP_DATA__
-  if (typeof window !== 'undefined' && (window as any).__APP_DATA__) {
-    const appData = (window as any).__APP_DATA__;
-    const siteConfig = appData?.siteConfig || {};
-    const customFields = siteConfig.customFields || {};
-
-    // Map our custom field names to the expected env var names
-    if (name === 'REACT_APP_RAG_API_URL') {
-      return customFields.RAG_API_URL || defaultValue;
-    } else if (name === 'NODE_ENV') {
-      return customFields.NODE_ENV || defaultValue;
-    }
-  }
-
-  // Fallback to default value
-  return defaultValue;
-};
-
-// Default API configuration
-const DEFAULT_API_CONFIG = {
-  baseUrl: getEnvVar('REACT_APP_RAG_API_URL', 'https://muhammadwaheedairi-rag-chatbot-textbook.hf.space'),
-  timeout: 60000, // 60 seconds timeout to accommodate Hugging Face Spaces cold starts
+const API_CONFIG = {
+  baseUrl: 'https://muhammadwaheedairi-rag-chatbot-textbook.hf.space', // Hugging Face Space URL
+  timeout: 60000, // 60 seconds timeout to accommodate HF Spaces cold starts
   maxRetries: 3,
   headers: {
     'Content-Type': 'application/json',
   },
 };
-
-// Environment-specific configurations
-const ENV_CONFIG = {
-  development: {
-    baseUrl: getEnvVar('REACT_APP_RAG_API_URL', 'http://localhost:8000'),
-  },
-  production: {
-    baseUrl: getEnvVar('REACT_APP_RAG_API_URL', 'https://muhammadwaheedairi-rag-chatbot-textbook.hf.space'), // Replace with actual production URL
-  },
-  test: {
-    baseUrl: getEnvVar('REACT_APP_RAG_API_URL', 'http://localhost:8000'),
-  },
-};
-
-// Get configuration based on environment
-const getApiConfig = () => {
-  // Determine environment from Docusaurus custom fields
-  let env = getEnvVar('NODE_ENV', 'development');
-
-  // Ensure production environment uses the production API URL
-  // This is important for deployment scenarios
-  if (env === 'production') {
-    // Force production config when NODE_ENV is set to production
-    return {
-      ...DEFAULT_API_CONFIG,
-      ...ENV_CONFIG.production,
-    };
-  } else if (env === 'development') {
-    // Use development config when NODE_ENV is development
-    return {
-      ...DEFAULT_API_CONFIG,
-      ...ENV_CONFIG.development,
-    };
-  } else if (env === 'test') {
-    // Use test config when NODE_ENV is test
-    return {
-      ...DEFAULT_API_CONFIG,
-      ...ENV_CONFIG.test,
-    };
-  } else {
-    // Fallback to development for any other environment
-    return {
-      ...DEFAULT_API_CONFIG,
-      ...ENV_CONFIG.development,
-    };
-  }
-};
-
-export const API_CONFIG = getApiConfig();
 
 // API endpoints
 export const API_ENDPOINTS = {
