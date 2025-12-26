@@ -107,7 +107,9 @@ const RagChatbot: React.FC<RagChatbotProps> = ({
       let errorMessage = 'An error occurred while processing your request.';
       if (error instanceof Error) {
         if (error.message.includes('Network Error') || error.message.includes('Failed to fetch')) {
-          errorMessage = 'Network error: Unable to connect to the server. Please check your connection and try again.';
+          errorMessage = 'Network error: Unable to connect to the server. This may be due to the backend being temporarily inactive. Please try again in a moment.';
+        } else if (error.message.includes('timeout') || error.message.includes('timeout')) {
+          errorMessage = 'Request timeout: The server is taking too long to respond. This may be due to the backend being temporarily inactive. Please try again.';
         } else {
           errorMessage = error.message;
         }
@@ -197,7 +199,9 @@ const RagChatbot: React.FC<RagChatbotProps> = ({
       let errorMessage = 'An error occurred while processing your request.';
       if (error instanceof Error) {
         if (error.message.includes('Network Error') || error.message.includes('Failed to fetch')) {
-          errorMessage = 'Network error: Unable to connect to the server. Please check your connection and try again.';
+          errorMessage = 'Network error: Unable to connect to the server. This may be due to the backend being temporarily inactive. Please try again in a moment.';
+        } else if (error.message.includes('timeout') || error.message.includes('timeout')) {
+          errorMessage = 'Request timeout: The server is taking too long to respond. This may be due to the backend being temporarily inactive. Please try again.';
         } else {
           errorMessage = error.message;
         }

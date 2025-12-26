@@ -7,7 +7,10 @@ import type * as Preset from '@docusaurus/preset-classic';
 // Define environment variables to pass to the client
 const siteConfig = {
   // Get environment variables - only pass the ones we want to expose to the client
-  RAG_API_URL: process.env.REACT_APP_RAG_API_URL || 'http://localhost:8000',
+  RAG_API_URL: process.env.REACT_APP_RAG_API_URL ||
+    (process.env.NODE_ENV === 'production'
+      ? 'https://muhammadwaheedairi-rag-chatbot-textbook.hf.space'
+      : 'http://localhost:8000'),
   NODE_ENV: process.env.NODE_ENV || 'development',
 };
 
