@@ -22,7 +22,7 @@ const getEnvVar = (name: string, defaultValue: string): string => {
 
 // Default API configuration
 const DEFAULT_API_CONFIG = {
-  baseUrl: getEnvVar('REACT_APP_RAG_API_URL', 'http://localhost:8000'),
+  baseUrl: getEnvVar('REACT_APP_RAG_API_URL', 'https://muhammadwaheedairi-rag-chatbot-textbook.hf.space'),
   timeout: 60000, // 60 seconds timeout to accommodate Hugging Face Spaces cold starts
   maxRetries: 3,
   headers: {
