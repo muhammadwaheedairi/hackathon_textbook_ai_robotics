@@ -1,7 +1,7 @@
 // API service for RAG Agent integration
 
 import { QueryRequest, QueryResponse } from '../../components/RagChatbot/RagChatbot.types';
-import { API_CONFIG, API_ENDPOINTS } from './config';
+import API_CONFIG, { API_ENDPOINTS } from './config';
 
 /**
  * Calls the backend RAG agent API to answer a question
@@ -16,6 +16,9 @@ export const askRagAgent = async (request: QueryRequest): Promise<QueryResponse>
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(request),
+      // Proper CORS handling for Hugging Face Spaces
+      mode: 'cors', // Enable CORS mode for cross-origin requests
+      credentials: 'omit', // Don't include credentials to avoid CORS issues
     });
 
     if (!response.ok) {
@@ -67,7 +70,10 @@ export const askRagAgent = async (request: QueryRequest): Promise<QueryResponse>
  */
 export const checkRagApiHealth = async (): Promise<boolean> => {
   try {
-    const response = await fetch(`${API_CONFIG.baseUrl}${API_ENDPOINTS.health}`);
+    const response = await fetch(`${API_CONFIG.baseUrl}${API_ENDPOINTS.health}`, {
+      mode: 'cors', // Enable CORS mode for cross-origin requests
+      credentials: 'omit', // Don't include credentials to avoid CORS issues
+    });
     return response.ok;
   } catch (error) {
     return false;
