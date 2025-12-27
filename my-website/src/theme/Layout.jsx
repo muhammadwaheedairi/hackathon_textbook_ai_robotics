@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import OriginalLayout from '@theme-original/Layout';
 import SearchBar from '@site/src/components/SearchBar/SearchBar';
-import RagChatbot from '@site/src/components/RagChatbot/RagChatbot';
 import { SearchProvider } from '@site/src/contexts/SearchContext';
 import '@site/src/css/search-styles.css';
-import '@site/src/css/floating-chatbot.css';
+import '@site/src/components/RagChatbot/chat.css';
+import ChatWidget from '@site/src/components/RagChatbot/ChatWidget';
 
 // Custom Layout wrapper to add search functionality and floating chatbot
 const Layout = (props) => {
@@ -37,33 +37,7 @@ const Layout = (props) => {
           </div>
         </div>
         {props.children}
-
-        {/* Floating chatbot button */}
-        <button
-          className="floating-chatbot-button"
-          onClick={toggleChatbot}
-          aria-label={isChatbotVisible ? "Close chatbot" : "Open chatbot"}
-          aria-expanded={isChatbotVisible}
-        >
-          💬
-        </button>
-
-        {/* Floating chatbot container */}
-        <div
-          className={`floating-chatbot-container ${isChatbotVisible ? 'visible' : ''}`}
-          role="dialog"
-          aria-modal="true"
-          aria-label="RAG Chatbot Interface"
-        >
-          <button
-            className="floating-chatbot-close"
-            onClick={closeChatbot}
-            aria-label="Close chatbot"
-          >
-            ×
-          </button>
-          <RagChatbot />
-        </div>
+        <ChatWidget />
       </OriginalLayout>
     </SearchProvider>
   );
