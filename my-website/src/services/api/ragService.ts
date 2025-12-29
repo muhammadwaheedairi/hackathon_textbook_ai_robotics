@@ -1,6 +1,6 @@
 // API service for RAG Agent integration
 
-import { QueryRequest, QueryResponse } from '../../components/RagChatbot/RagChatbot.types';
+import { QueryRequest, QueryResponse } from '../../components/RagChatbot/RagChatbot';
 import API_CONFIG, { API_ENDPOINTS } from './config';
 
 /**
@@ -27,7 +27,6 @@ export const askRagAgent = async (request: QueryRequest): Promise<QueryResponse>
         return {
           answer: '',
           sources: [],
-          matched_chunks: [],
           error: 'Bad request - query validation failed',
           status: 'error',
         };
@@ -35,7 +34,6 @@ export const askRagAgent = async (request: QueryRequest): Promise<QueryResponse>
         return {
           answer: '',
           sources: [],
-          matched_chunks: [],
           error: 'Internal server error occurred',
           status: 'error',
         };
@@ -43,7 +41,6 @@ export const askRagAgent = async (request: QueryRequest): Promise<QueryResponse>
         return {
           answer: '',
           sources: [],
-          matched_chunks: [],
           error: `Request failed with status ${response.status}`,
           status: 'error',
         };
@@ -57,7 +54,6 @@ export const askRagAgent = async (request: QueryRequest): Promise<QueryResponse>
     return {
       answer: '',
       sources: [],
-      matched_chunks: [],
       error: error instanceof Error ? error.message : 'Network error occurred',
       status: 'error',
     };
