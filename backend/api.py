@@ -3,7 +3,7 @@ import asyncio
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional, Dict
+from typing import Optional
 from dotenv import load_dotenv
 import logging
 
@@ -24,10 +24,10 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Add CORS middleware for development
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,20 +37,10 @@ app.add_middleware(
 class QueryRequest(BaseModel):
     query: str
 
-class MatchedChunk(BaseModel):
-    content: str
-    url: str
-    position: int
-    similarity_score: float
-
 class QueryResponse(BaseModel):
     answer: str
-    sources: List[str]
-    matched_chunks: List[MatchedChunk]
     error: Optional[str] = None
-    status: str  # "success", "error", "empty"
-    query_time_ms: Optional[float] = None
-    confidence: Optional[str] = None
+    status: str  # "success", "error"
 
 class HealthResponse(BaseModel):
     status: str
@@ -73,9 +63,7 @@ async def startup_event():
 
 @app.post("/ask", response_model=QueryResponse)
 async def ask_rag(request: QueryRequest):
-    """
-    Process a user query through the RAG agent and return the response
-    """
+    """Process a user query and return only the answer"""
     logger.info(f"Processing query: {request.query[:50]}...")
 
     try:
@@ -89,27 +77,12 @@ async def ask_rag(request: QueryRequest):
         # Process query through RAG agent
         response = rag_agent.query_agent(request.query)
 
-        # Format response
-        formatted_response = QueryResponse(
+        # Return only answer
+        return QueryResponse(
             answer=response.get("answer", ""),
-            sources=response.get("sources", []),
-            matched_chunks=[
-                MatchedChunk(
-                    content=chunk.get("content", ""),
-                    url=chunk.get("url", ""),
-                    position=chunk.get("position", 0),
-                    similarity_score=chunk.get("similarity_score", 0.0)
-                )
-                for chunk in response.get("matched_chunks", [])
-            ],
             error=response.get("error"),
-            status="error" if response.get("error") else "success",
-            query_time_ms=response.get("query_time_ms"),
-            confidence=response.get("confidence")
+            status="error" if response.get("error") else "success"
         )
-
-        logger.info(f"Query processed successfully in {response.get('query_time_ms', 0):.2f}ms")
-        return formatted_response
 
     except HTTPException:
         raise
@@ -117,23 +90,17 @@ async def ask_rag(request: QueryRequest):
         logger.error(f"Error processing query: {e}")
         return QueryResponse(
             answer="",
-            sources=[],
-            matched_chunks=[],
             error=str(e),
             status="error"
         )
 
 @app.get("/health", response_model=HealthResponse)
 async def health_check():
-    """
-    Health check endpoint
-    """
     return HealthResponse(
         status="healthy",
         message="RAG Agent API is running"
     )
 
-# For running with uvicorn
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

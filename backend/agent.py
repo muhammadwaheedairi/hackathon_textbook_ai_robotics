@@ -2,44 +2,14 @@ import os
 import json
 import logging
 import time
-from typing import Dict, List
+from typing import Dict
 from dotenv import load_dotenv
-from openai import OpenAI  # OpenAI-compatible client for OpenRouter
+from openai import OpenAI
 from retrieving import RAGRetriever
-from agents import function_tool
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-@function_tool
-def retrieve_information(query: str) -> Dict:
-    retriever = RAGRetriever()
-    try:
-        json_resp = retriever.retrieve(query_text=query, top_k=5, threshold=0.3)
-        results = json.loads(json_resp).get("results", [])
-        formatted = [
-            {
-                "content": r["content"],
-                "url": r["url"],
-                "position": r.get("position", 0),
-                "similarity_score": r["similarity_score"]
-            }
-            for r in results
-        ]
-        return {
-            "query": query,
-            "retrieved_chunks": formatted,
-            "total_results": len(formatted)
-        }
-    except Exception as e:
-        logger.error(f"Error in retrieve_information: {e}")
-        return {
-            "query": query,
-            "retrieved_chunks": [],
-            "total_results": 0,
-            "error": str(e)
-        }
 
 class RAGAgent:
     def __init__(self):
@@ -47,8 +17,8 @@ class RAGAgent:
             base_url="https://openrouter.ai/api/v1",
             api_key=os.getenv("OPENROUTER_API_KEY")
         )
-        # Free model
-        self.model = "mistralai/devstral-2512:free"
+        # Working free model
+        self.model = "arcee-ai/trinity-large-preview:free"
         logger.info("RAG Agent initialized with OpenRouter free model")
 
     def query_agent(self, query_text: str) -> Dict:
@@ -61,15 +31,15 @@ class RAGAgent:
             data = json.loads(raw)
             chunks = data.get("results", [])
 
-            # Prepare prompt
+            # Prepare context
             context = ""
             for c in chunks:
-                context += f"URL: {c['url']}\n{c['content']}\n\n"
+                context += f"{c['content']}\n\n"
 
             prompt = (
-                "Answer the question using the following retrieved context. "
+                "Answer the question concisely using the following context. "
                 "If not in the context, answer based on general knowledge.\n\n"
-                f"{context}"
+                f"Context:\n{context}"
                 f"Question: {query_text}\nAnswer:"
             )
 
@@ -77,30 +47,24 @@ class RAGAgent:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "system", "content": "You are a helpful assistant for a robotics textbook. Give concise, clear answers."},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.5,
-                max_tokens=512
+                max_tokens=256
             )
 
             answer = response.choices[0].message.content.strip()
 
-            query_time_ms = (time.time() - start_time) * 1000
             return {
                 "answer": answer,
-                "sources": [c["url"] for c in chunks],
-                "matched_chunks": chunks,
-                "query_time_ms": query_time_ms,
-                "confidence": "medium"
+                "query_time_ms": (time.time() - start_time) * 1000
             }
 
         except Exception as e:
             logger.error(f"Error in RAGAgent query_agent: {e}")
             return {
                 "answer": "",
-                "sources": [],
-                "matched_chunks": [],
                 "error": str(e),
                 "query_time_ms": (time.time() - start_time) * 1000
             }
