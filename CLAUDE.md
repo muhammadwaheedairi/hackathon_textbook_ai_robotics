@@ -221,6 +221,5 @@ See `.specify/memory/constitution.md` for code quality, testing, performance, se
 - JavaScript/TypeScript (compatible with Docusaurus 3.x), React 18.x + React, Docusaurus 3.x, axios/fetch for API calls, debounce utilities (lodash or custom implementation) (001-rag-chatbot-frontend)
 - N/A (client-side only, no persistent storage required) (001-rag-chatbot-frontend)
 - JavaScript/TypeScript (compatible with Docusaurus 3.x), Python 3.11+ for backend + React 18.x (Docusaurus dependency), axios/fetch for API calls, debounce utilities (lodash or custom implementation), existing FastAPI backend (004-rag-agent-frontend-integration)
-
 ## Recent Changes
 - 001-ai-textbook-physical-ai: Added Markdown for content, JavaScript/Node.js for Docusaurus configuration (Node.js 18+ LTS) + Docusaurus 3.x, React, GitHub Pages plugin, GitHub Actions
