@@ -62,6 +62,150 @@ function ChatGPTIcon() {
   );
 }
 
+function UrduIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z" fill="currentColor"/>
+    </svg>
+  );
+}
+
+// ─── Translate Button ─────────────────────────────────────────────────────────
+
+function TranslateButton() {
+  const [isTranslated, setIsTranslated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const originalContentRef = useRef<string | null>(null);
+
+  const translateText = async (text: string): Promise<string> => {
+    const chunks = text.match(/.{1,500}/gs) || [];
+    const translated: string[] = [];
+
+    for (const chunk of chunks) {
+      const res = await fetch(
+        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=en|ur`
+      );
+      const data = await res.json();
+      translated.push(data.responseData?.translatedText || chunk);
+    }
+
+    return translated.join(' ');
+  };
+
+  const handleTranslate = useCallback(async () => {
+    const article = document.querySelector('article');
+    if (!article) return;
+
+    if (isTranslated) {
+      // Restore original
+      if (originalContentRef.current) {
+        article.innerHTML = originalContentRef.current;
+      }
+      setIsTranslated(false);
+      return;
+    }
+
+    // Save original
+    originalContentRef.current = article.innerHTML;
+    setIsLoading(true);
+
+    try {
+      // Get all text nodes to translate
+      const walker = document.createTreeWalker(
+        article,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) => {
+            const parent = node.parentElement;
+            if (!parent) return NodeFilter.FILTER_REJECT;
+            const tag = parent.tagName.toLowerCase();
+            if (['script', 'style', 'code', 'pre'].includes(tag)) return NodeFilter.FILTER_REJECT;
+            if (node.textContent?.trim() === '') return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        }
+      );
+
+      const textNodes: Text[] = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        textNodes.push(node as Text);
+      }
+
+      // Translate in batches
+      for (const textNode of textNodes) {
+        const original = textNode.textContent?.trim();
+        if (!original || original.length < 3) continue;
+        const res = await fetch(
+          `https://api.mymemory.translated.net/get?q=${encodeURIComponent(original)}&langpair=en|ur`
+        );
+        const data = await res.json();
+        const translated = data.responseData?.translatedText;
+        if (translated && translated !== original) {
+          textNode.textContent = translated;
+        }
+      }
+
+      setIsTranslated(true);
+    } catch (err) {
+      console.error('Translation failed:', err);
+      // Restore on error
+      if (originalContentRef.current) {
+        article.innerHTML = originalContentRef.current;
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isTranslated]);
+
+  return (
+    <button
+      onClick={handleTranslate}
+      disabled={isLoading}
+      title={isTranslated ? 'Show original English' : 'Translate to Urdu'}
+      aria-label={isTranslated ? 'Show original English' : 'Translate to Urdu'}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '6px',
+        padding: '0 0.875rem',
+        height: '32px',
+        fontSize: '0.8rem',
+        fontWeight: 500,
+        fontFamily: 'var(--ifm-font-family-base)',
+        color: isTranslated ? '#ffffff' : '#374151',
+        background: isTranslated ? '#0070f3' : '#ffffff',
+        border: '1px solid',
+        borderColor: isTranslated ? '#0070f3' : '#e5e7eb',
+        borderRadius: '6px',
+        cursor: isLoading ? 'wait' : 'pointer',
+        whiteSpace: 'nowrap',
+        transition: 'all 0.15s ease',
+        marginLeft: '8px',
+      }}>
+      {isLoading ? (
+        <>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"
+            style={{animation: 'spin 1s linear infinite'}}>
+            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="31.4" strokeDashoffset="10"/>
+          </svg>
+          ترجمہ ہو رہا ہے...
+        </>
+      ) : isTranslated ? (
+        <>
+          <UrduIcon />
+          Show English
+        </>
+      ) : (
+        <>
+          <UrduIcon />
+          اردو
+        </>
+      )}
+    </button>
+  );
+}
+
 // ─── Copy Page Button + Dropdown ──────────────────────────────────────────────
 
 function CopyPageButton() {
@@ -69,7 +213,6 @@ function CopyPageButton() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
@@ -120,7 +263,6 @@ function CopyPageButton() {
 
   return (
     <div className={styles.copyPageWrapper} ref={wrapperRef}>
-      {/* Main copy button */}
       <button
         onClick={handleCopy}
         className={clsx(styles.copyPageBtn, copied && styles.copyPageBtnCopied)}
@@ -129,10 +271,8 @@ function CopyPageButton() {
         {copied ? 'Copied!' : 'Copy page'}
       </button>
 
-      {/* Divider */}
       <div className={styles.copyPageDivider} />
 
-      {/* Chevron toggle */}
       <button
         className={clsx(styles.copyPageChevron, dropdownOpen && styles.copyPageChevronOpen)}
         onClick={() => setDropdownOpen((v) => !v)}
@@ -143,7 +283,6 @@ function CopyPageButton() {
         </svg>
       </button>
 
-      {/* Dropdown menu */}
       {dropdownOpen && (
         <div className={styles.dropdown}>
           <button className={styles.dropdownItem} onClick={handleViewAsMarkdown}>
@@ -192,7 +331,10 @@ export default function DocItemLayout({children}: Props): ReactNode {
               <div className={styles.breadcrumbsWrapper}>
                 <DocBreadcrumbs />
               </div>
-              <CopyPageButton />
+              <div style={{display:'flex', alignItems:'center'}}>
+                <CopyPageButton />
+                <TranslateButton />
+              </div>
             </div>
             <DocVersionBadge />
             {docTOC.mobile}
