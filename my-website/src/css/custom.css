@@ -1,18 +1,9 @@
-/**
- * AI-Native Textbook — Custom CSS
- * Style: Next.js Docs inspired — Dark, minimal, professional
- */
-
-/* ============================================================
-   FONTS
-   ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
 
 /* ============================================================
    CSS VARIABLES — LIGHT MODE
    ============================================================ */
 :root {
-  /* Primary — subtle blue like Next.js */
   --ifm-color-primary: #0070f3;
   --ifm-color-primary-dark: #0060d1;
   --ifm-color-primary-darker: #005ac4;
@@ -21,27 +12,21 @@
   --ifm-color-primary-lighter: #2e8bf6;
   --ifm-color-primary-lightest: #5aa5f8;
 
-  /* Typography */
   --ifm-font-family-base: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --ifm-font-family-monospace: 'Geist Mono', 'Fira Code', monospace;
   --ifm-font-size-base: 15px;
   --ifm-line-height-base: 1.7;
 
-  /* Spacing */
   --ifm-spacing-horizontal: 1.5rem;
-
-  /* Border radius */
   --ifm-border-radius: 8px;
   --ifm-code-border-radius: 6px;
   --ifm-global-radius: 8px;
 
-  /* Code */
   --ifm-code-font-size: 87%;
   --ifm-code-padding-horizontal: 0.4em;
   --ifm-code-padding-vertical: 0.2em;
   --docusaurus-highlighted-code-line-bg: rgba(0, 112, 243, 0.08);
 
-  /* Light mode colors */
   --ifm-background-color: #ffffff;
   --ifm-background-surface-color: #f9fafb;
   --ifm-navbar-background-color: rgba(255, 255, 255, 0.85);
@@ -53,13 +38,11 @@
   --ifm-color-emphasis-700: #374151;
   --ifm-color-emphasis-900: #111827;
 
-  /* Module accent colors */
-  --module-1: #3b82f6;   /* Slate Blue — ROS 2 */
-  --module-2: #6366f1;   /* Indigo — Digital Twin */
-  --module-3: #10b981;   /* Emerald — NVIDIA Isaac */
-  --module-4: #f59e0b;   /* Amber — VLA */
+  --module-1: #3b82f6;
+  --module-2: #6366f1;
+  --module-3: #10b981;
+  --module-4: #f59e0b;
 
-  /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
 }
@@ -117,8 +100,8 @@ body {
    NAVBAR
    ============================================================ */
 .navbar {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  
+  
   border-bottom: 1px solid var(--ifm-toc-border-color);
   box-shadow: none;
   height: 60px;
@@ -150,12 +133,8 @@ body {
 }
 
 /* ============================================================
-   SIDEBAR FIXES — paste these into custom.css
-   Replace the existing "SIDEBAR" and "MODULE COLOR ACCENTS" sections
+   SIDEBAR
    ============================================================ */
-
-/* ─── SIDEBAR CONTAINER ──────────────────────────────────────── */
-
 .theme-doc-sidebar-container {
   border-right: 1px solid #e5e7eb;
 }
@@ -170,9 +149,6 @@ body {
   font-size: 0.875rem;
 }
 
-/* ─── MODULE CATEGORY (top level) ───────────────────────────── */
-
-/* All module labels — default BLACK, not colored */
 .menu__list-item-collapsible .menu__link {
   font-size: 0.8rem;
   font-weight: 600;
@@ -198,8 +174,6 @@ body {
   color: #f3f4f6;
 }
 
-/* ─── WEEK CATEGORY (second level) ──────────────────────────── */
-
 .menu__list .menu__list .menu__list-item-collapsible .menu__link {
   font-size: 0.8rem;
   font-weight: 500;
@@ -222,8 +196,6 @@ body {
   color: #f3f4f6;
   background: #1f1f1f;
 }
-
-/* ─── CHAPTER LINKS (leaf items) ────────────────────────────── */
 
 .menu__link {
   border-radius: 6px;
@@ -249,8 +221,6 @@ body {
   color: #f3f4f6;
 }
 
-/* ─── ACTIVE LINK — blue highlight like Next.js ─────────────── */
-
 .menu__link--active {
   background: #eff6ff !important;
   color: #0070f3 !important;
@@ -262,7 +232,6 @@ body {
   color: #60a5fa !important;
 }
 
-/* Active category label also turns blue */
 .menu__list-item-collapsible .menu__link--active {
   color: #0070f3 !important;
   background: transparent !important;
@@ -272,8 +241,6 @@ body {
   color: #60a5fa !important;
   background: transparent !important;
 }
-
-/* ─── INDENTATION LINES ──────────────────────────────────────── */
 
 .menu__list .menu__list {
   border-left: 1px solid #e5e7eb;
@@ -285,13 +252,9 @@ body {
   border-left-color: #1f1f1f;
 }
 
-/* Remove double indentation for third level */
 .menu__list .menu__list .menu__list {
   margin-left: 0.5rem;
 }
-
-/* ─── REMOVE OLD MODULE COLOR OVERRIDES ──────────────────────── */
-/* These override the nth-child color rules from before */
 
 .menu__list-item:nth-child(3) > .menu__list-item-collapsible > .menu__link,
 .menu__list-item:nth-child(4) > .menu__list-item-collapsible > .menu__link,
@@ -331,7 +294,6 @@ article {
   color: var(--ifm-font-color-base);
 }
 
-/* Headings */
 .markdown h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -368,12 +330,10 @@ article {
   color: var(--ifm-heading-color);
 }
 
-/* Paragraphs */
 .markdown p {
   margin-bottom: 1rem;
 }
 
-/* Links */
 .markdown a {
   color: var(--ifm-color-primary);
   text-decoration: none;
@@ -386,7 +346,6 @@ article {
   border-bottom-color: var(--ifm-color-primary);
 }
 
-/* Lists */
 .markdown ul,
 .markdown ol {
   padding-left: 1.5rem;
@@ -420,7 +379,6 @@ code {
   border: 1px solid #2d2d2d;
 }
 
-/* Code block container */
 .prism-code {
   font-family: var(--ifm-font-family-monospace) !important;
   font-size: 0.85rem !important;
@@ -437,28 +395,8 @@ code {
   border: 1px solid #e5e7eb !important;
 }
 
-/* Code block title bar */
-.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
-  background: var(--ifm-color-emphasis-200);
-  border-bottom: 1px solid var(--ifm-toc-border-color);
-  font-family: var(--ifm-font-family-monospace);
-  font-size: 0.8rem;
-  border-radius: 8px 8px 0 0;
-}
-
-/* Copy button */
-.copyButton_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-CopyButton-styles-module {
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module:hover
-  .copyButton_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-CopyButton-styles-module {
-  opacity: 1;
-}
-
 /* ============================================================
-   ADMONITIONS (Callout Boxes)
+   ADMONITIONS
    ============================================================ */
 .admonition {
   border-radius: 8px;
@@ -469,7 +407,6 @@ code {
   font-size: 0.9rem;
 }
 
-/* Info — Learning Objectives */
 .admonition-info {
   background: rgba(59, 130, 246, 0.05);
   border-color: rgba(59, 130, 246, 0.2);
@@ -480,7 +417,6 @@ code {
   color: #3b82f6;
 }
 
-/* Tip — Key Takeaways */
 .admonition-tip {
   background: rgba(16, 185, 129, 0.05);
   border-color: rgba(16, 185, 129, 0.2);
@@ -491,7 +427,6 @@ code {
   color: #10b981;
 }
 
-/* Warning */
 .admonition-warning {
   background: rgba(245, 158, 11, 0.05);
   border-color: rgba(245, 158, 11, 0.2);
@@ -502,7 +437,6 @@ code {
   color: #f59e0b;
 }
 
-/* Note */
 .admonition-note {
   background: rgba(99, 102, 241, 0.05);
   border-color: rgba(99, 102, 241, 0.2);
@@ -513,7 +447,6 @@ code {
   color: #6366f1;
 }
 
-/* Danger */
 .admonition-danger {
   background: rgba(239, 68, 68, 0.05);
   border-color: rgba(239, 68, 68, 0.2);
@@ -584,7 +517,7 @@ code {
 }
 
 /* ============================================================
-   TABLE OF CONTENTS (Right sidebar)
+   TABLE OF CONTENTS
    ============================================================ */
 .table-of-contents {
   font-size: 0.8rem;
@@ -611,7 +544,7 @@ code {
 }
 
 /* ============================================================
-   PAGINATION (Prev/Next)
+   PAGINATION
    ============================================================ */
 .pagination-nav {
   margin-top: 3rem;
@@ -733,7 +666,7 @@ code {
 }
 
 /* ============================================================
-   SCROLLBAR (webkit)
+   SCROLLBAR
    ============================================================ */
 ::-webkit-scrollbar {
   width: 6px;
@@ -760,27 +693,57 @@ code {
   .navbar {
     padding: 0 1rem;
   }
-
   .markdown h1 {
     font-size: 1.625rem;
   }
-
   .markdown h2 {
     font-size: 1.25rem;
   }
-
   article {
     padding: 1.5rem 0;
   }
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    height: 56px;
+    padding: 0 1rem;
+  }
+  .navbar__brand {
+    flex: 1;
+  }
   .pagination-nav {
     grid-template-columns: 1fr;
   }
-
+  .markdown table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .prism-code {
+    font-size: 0.78rem !important;
+  }
+  article {
+    padding: 1rem 0;
+  }
   .markdown h1 {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
+  }
+  .markdown h2 {
+    font-size: 1.125rem;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    height: 52px;
+  }
+  .navbar__title {
+    font-size: 0.875rem;
+  }
+  .markdown h1 {
+    font-size: 1.25rem;
   }
 }
 

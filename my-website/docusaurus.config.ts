@@ -99,7 +99,7 @@ const config: Config = {
 
     navbar: {
       title: 'AI-Native Textbook',
-      hideOnScroll: true,
+      hideOnScroll: false,
       logo: {
         alt: 'AI-Native Textbook Logo',
         src: 'img/logo.svg',

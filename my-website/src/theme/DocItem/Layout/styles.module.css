@@ -150,7 +150,7 @@
   color: #d1d5db;
 }
 
-/* ─── DROPDOWN MENU — pixel perfect Next.js style ────────────── */
+/* ─── DROPDOWN MENU ──────────────────────────────────────────── */
 
 .dropdown {
   position: absolute;
@@ -196,7 +196,6 @@
   background: #2d2d2d;
 }
 
-/* Icon */
 .dropdownIcon {
   display: flex;
   align-items: center;
@@ -217,7 +216,6 @@
   color: #d1d5db;
 }
 
-/* Text block */
 .dropdownText {
   display: flex;
   flex-direction: column;
@@ -250,14 +248,69 @@
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 
-@media (max-width: 640px) {
-  .copyPageBtn span,
+@media (max-width: 996px) {
+  .docItemCol {
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .docItemContainer {
+    margin: 0 0.75rem;
+    padding: 0.75rem 0;
+  }
+
+  .docTopBar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumbsWrapper {
+    width: 100%;
+    flex: unset;
+  }
+
+  .breadcrumbsWrapper ul {
+    flex-wrap: wrap !important;
+  }
+
+  .copyPageWrapper {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .copyPageBtn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .dropdown {
+    width: 100%;
+    right: 0;
+    left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .docItemContainer {
+    margin: 0 0.5rem;
+  }
+
   .copyPageBtn {
     font-size: 0.75rem;
     padding: 0 0.6rem;
   }
 
   .dropdown {
-    width: 220px;
+    width: 100%;
+  }
+
+  .dropdownTitle {
+    font-size: 0.8rem;
+  }
+
+  .dropdownDesc {
+    font-size: 0.7rem;
   }
 }
