@@ -1,0 +1,263 @@
+/* ─── DOC ITEM COL ───────────────────────────────────────────── */
+
+.docItemCol {
+  max-width: 75% !important;
+}
+
+.docItemContainer {
+  margin: 0 var(--ifm-spacing-horizontal);
+  padding: var(--ifm-spacing-horizontal) 0;
+}
+
+/* ─── TOP BAR ────────────────────────────────────────────────── */
+
+.docTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.breadcrumbsWrapper {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.breadcrumbsWrapper nav {
+  margin-bottom: 0 !important;
+}
+
+.breadcrumbsWrapper ul {
+  margin-bottom: 0 !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden;
+}
+
+/* ─── COPY PAGE WRAPPER ──────────────────────────────────────── */
+
+.copyPageWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: visible;
+  background: #ffffff;
+  height: 32px;
+}
+
+[data-theme='dark'] .copyPageWrapper {
+  border-color: #2d2d2d;
+  background: #111111;
+}
+
+/* ─── COPY PAGE MAIN BUTTON ──────────────────────────────────── */
+
+.copyPageBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.875rem;
+  height: 30px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: var(--ifm-font-family-base);
+  color: #374151;
+  background: transparent;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s ease, color 0.12s ease;
+  line-height: 1;
+}
+
+.copyPageBtn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.copyPageBtnCopied {
+  color: #10b981 !important;
+}
+
+[data-theme='dark'] .copyPageBtn {
+  color: #d1d5db;
+}
+
+[data-theme='dark'] .copyPageBtn:hover {
+  background: #1a1a1a;
+  color: #f3f4f6;
+}
+
+[data-theme='dark'] .copyPageBtnCopied {
+  color: #34d399 !important;
+}
+
+/* ─── DIVIDER ────────────────────────────────────────────────── */
+
+.copyPageDivider {
+  width: 1px;
+  height: 16px;
+  background: #e5e7eb;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .copyPageDivider {
+  background: #2d2d2d;
+}
+
+/* ─── CHEVRON BUTTON ─────────────────────────────────────────── */
+
+.copyPageChevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+  height: 30px;
+  background: transparent;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  color: #6b7280;
+  flex-shrink: 0;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.copyPageChevron svg {
+  transition: transform 0.15s ease;
+}
+
+.copyPageChevronOpen svg {
+  transform: rotate(180deg);
+}
+
+.copyPageChevron:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+[data-theme='dark'] .copyPageChevron {
+  color: #9ca3af;
+}
+
+[data-theme='dark'] .copyPageChevron:hover {
+  background: #1a1a1a;
+  color: #d1d5db;
+}
+
+/* ─── DROPDOWN MENU — pixel perfect Next.js style ────────────── */
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 260px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+  z-index: 999;
+  overflow: hidden;
+  padding: 4px;
+}
+
+[data-theme='dark'] .dropdown {
+  background: #1a1a1a;
+  border-color: #2d2d2d;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── DROPDOWN ITEM ──────────────────────────────────────────── */
+
+.dropdownItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s ease;
+}
+
+.dropdownItem:hover {
+  background: #f3f4f6;
+}
+
+[data-theme='dark'] .dropdownItem:hover {
+  background: #2d2d2d;
+}
+
+/* Icon */
+.dropdownIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #f9fafb;
+  color: #374151;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+[data-theme='dark'] .dropdownIcon {
+  border-color: #2d2d2d;
+  background: #111111;
+  color: #d1d5db;
+}
+
+/* Text block */
+.dropdownText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dropdownTitle {
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1.3;
+  font-family: var(--ifm-font-family-base);
+}
+
+[data-theme='dark'] .dropdownTitle {
+  color: #f3f4f6;
+}
+
+.dropdownDesc {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  line-height: 1.3;
+  font-family: var(--ifm-font-family-base);
+}
+
+[data-theme='dark'] .dropdownDesc {
+  color: #6b7280;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .copyPageBtn span,
+  .copyPageBtn {
+    font-size: 0.75rem;
+    padding: 0 0.6rem;
+  }
+
+  .dropdown {
+    width: 220px;
+  }
+}

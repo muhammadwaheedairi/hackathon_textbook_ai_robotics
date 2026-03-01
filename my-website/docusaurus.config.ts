@@ -6,7 +6,6 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // Define environment variables to pass to the client
 const siteConfig = {
-  // Get environment variables - only pass the ones we want to expose to the client
   RAG_API_URL: process.env.REACT_APP_RAG_API_URL ||
     (process.env.NODE_ENV === 'production'
       ? 'https://muhammadwaheedairi-rag-chatbot-textbook.hf.space'
@@ -19,31 +18,39 @@ const config: Config = {
   tagline: 'A comprehensive textbook covering ROS 2, Gazebo, NVIDIA Isaac, and Vision-Language-Action systems',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
-  future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
-  },
 
-  // Set the production url of your site here
   url: 'https://muhammadwaheedairi.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/hackathon_textbook_ai_robotics/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'muhammadwaheedairi', // Usually your GitHub org/user name.
-  projectName: 'hackathon_textbook_ai_robotics', // Usually your repo name.
+  organizationName: 'muhammadwaheedairi',
+  projectName: 'hackathon_textbook_ai_robotics',
 
   onBrokenLinks: 'throw',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  plugins: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: ['en'],
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: false,
+        docsRouteBasePath: '/docs',
+        searchBarPosition: 'right',
+        searchBarShortcutHint: true,
+        searchResultLimits: 8,
+        searchResultContextMaxLength: 50,
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+      },
+    ],
+  ],
 
   presets: [
     [
@@ -51,8 +58,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/muhammadwaheedairi/hackathon_textbook_ai_robotics/edit/main/my-website/',
         },
@@ -62,11 +67,8 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/muhammadwaheedairi/hackathon_textbook_ai_robotics/edit/main/my-website/',
-          // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -79,22 +81,25 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
+
+    // ✅ Default dark mode
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
-    // Enhanced accessibility and mobile responsiveness settings
+
     metadata: [
       {name: 'viewport', content: 'width=device-width, initial-scale=1.0'},
-      {name: 'theme-color', content: '#12affa'},
+      {name: 'theme-color', content: '#0070f3'},
       {name: 'description', content: 'AI-Native Textbook for Physical AI & Humanoid Robotics covering ROS 2, Gazebo, NVIDIA Isaac, and Vision-Language-Action systems'},
       {name: 'keywords', content: 'robotics, AI, textbook, ROS 2, Gazebo, NVIDIA Isaac, humanoid robotics, physical AI, education'},
     ],
+
     navbar: {
       title: 'AI-Native Textbook',
+      hideOnScroll: true,
       logo: {
         alt: 'AI-Native Textbook Logo',
         src: 'img/logo.svg',
@@ -102,7 +107,7 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'textbookSidebar',
+          sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Textbook',
         },
@@ -114,6 +119,7 @@ const config: Config = {
         },
       ],
     },
+
     footer: {
       style: 'dark',
       links: [
@@ -159,11 +165,14 @@ const config: Config = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} AI-Native Textbook — Physical AI & Humanoid Robotics. Built with Docusaurus.`,
     },
+
+    // ✅ VS Dark theme + additional languages
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.vsDark,
+      darkTheme: prismThemes.vsDark,
+      additionalLanguages: ['bash', 'python', 'yaml', 'cpp', 'csharp', 'typescript'],
     },
-    // Custom fields to pass environment variables to the client
+
     customFields: {
       RAG_API_URL: siteConfig.RAG_API_URL,
       NODE_ENV: siteConfig.NODE_ENV,
