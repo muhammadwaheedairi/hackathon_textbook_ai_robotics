@@ -59,24 +59,52 @@ This project is an AI-native textbook platform built for **Hackathon I** at Pana
 
 ### Course Curriculum
 
-**Module 1: The Robotic Nervous System (ROS 2)** - Weeks 1-3
-- Introduction to Physical AI and Sensors
-- ROS 2 Fundamentals (Nodes, Topics, Services)
-- Python Agent Integration with ROS Controllers
+**Module 1: The Robotic Nervous System (ROS 2)** - Weeks 1-3 (6 Chapters)
+- Week 1: Introduction to Physical AI
+  - Chapter 1: What is Physical AI
+  - Chapter 2: LiDAR & IMU Sensors
+- Week 2: ROS 2 Fundamentals
+  - Chapter 3: Nodes & Topics
+  - Chapter 4: Services & Packages
+- Week 3: Python Agent Integration
+  - Chapter 5: Python Agent Integration
+  - Chapter 6: URDF & Xacro Modeling
 
-**Module 2: The Digital Twin (Gazebo & Unity)** - Weeks 4-5
-- Physics Simulation in Gazebo
-- High-Fidelity Rendering in Unity
+**Module 2: The Digital Twin (Gazebo & Unity)** - Weeks 4-5 (4 Chapters)
+- Week 4: Physics Simulation in Gazebo
+  - Chapter 7: Physics Simulation Fundamentals
+  - Chapter 8: Gazebo ROS2 Integration
+- Week 5: High-Fidelity Rendering in Unity
+  - Chapter 9: Unity Rendering Pipelines
+  - Chapter 10: Sensor Simulation in Unity
 
-**Module 3: The AI-Robot Brain (NVIDIA Isaac™)** - Weeks 6-8
-- NVIDIA Isaac Sim (Photorealistic Simulation)
-- Isaac ROS (Hardware-Accelerated VSLAM)
-- Isaac Sim for Reinforcement Learning
+**Module 3: The AI-Robot Brain (NVIDIA Isaac™)** - Weeks 6-8 (6 Chapters)
+- Week 6: NVIDIA Isaac Sim
+  - Chapter 11: Isaac Sim Architecture
+  - Chapter 12: Photorealistic Environments
+- Week 7: Isaac ROS Hardware Accelerated
+  - Chapter 13: Isaac ROS VSLAM
+  - Chapter 14: Nav2 Integration
+- Week 8: Isaac Sim Reinforcement Learning
+  - Chapter 15: Isaac Gym GPU RL
+  - Chapter 16: Domain Randomization
 
-**Module 4: Vision-Language-Action (VLA)** - Weeks 9-13
-- Voice-to-Action with OpenAI Whisper
-- Cognitive Planning with LLMs
-- Capstone: Autonomous Humanoid Deployment
+**Module 4: Vision-Language-Action (VLA)** - Weeks 9-13 (10 Chapters)
+- Week 9: Voice-to-Action with OpenAI Whisper
+  - Chapter 17: Whisper Speech Recognition
+  - Chapter 18: Voice ROS2 Integration
+- Week 10: Cognitive Planning with LLMs
+  - Chapter 19: LLM Cognitive Planning
+  - Chapter 20: Action Planning & Safety
+- Week 11: System Integration
+  - Chapter 21: System Architecture
+  - Chapter 22: Vision & Multimodal
+- Week 12: Advanced Deployment
+  - Chapter 23: Real-World Deployment
+  - Chapter 24: Learning & Adaptation
+- Week 13: Testing & Validation
+  - Chapter 25: Testing & Validation
+  - Chapter 26: Final Deployment
 
 ---
 
@@ -157,20 +185,64 @@ This project is an AI-native textbook platform built for **Hackathon I** at Pana
 ```
 hackathon_textbook_ai_robotics/
 ├── my-website/                    # Frontend (Docusaurus)
-│   ├── docs/                      # Textbook content (Markdown)
+│   ├── docs/                      # Textbook content (26 chapters)
 │   │   ├── intro.md
 │   │   ├── quickstart.md
 │   │   ├── module-1-robotic-nervous-system/
+│   │   │   ├── index.md
+│   │   │   ├── week-1-introduction-to-physical-ai/
+│   │   │   │   ├── chapter-1-what-is-physical-ai.md
+│   │   │   │   └── chapter-2-lidar-imu-sensors.md
+│   │   │   ├── week-2-ros-2-fundamentals/
+│   │   │   │   ├── chapter-3-nodes-topics.md
+│   │   │   │   └── chapter-4-services-packages.md
+│   │   │   └── week-3-python-agent-integration/
+│   │   │       ├── chapter-5-python-agent-integration.md
+│   │   │       └── chapter-6-urdf-xacro-modeling.md
 │   │   ├── module-2-digital-twin/
+│   │   │   ├── index.md
+│   │   │   ├── week-4-physics-simulation-in-gazebo/
+│   │   │   │   ├── chapter-7-physics-simulation-fundamentals.md
+│   │   │   │   └── chapter-8-gazebo-ros2-integration.md
+│   │   │   └── week-5-high-fidelity-rendering-in-unity/
+│   │   │       ├── chapter-9-unity-rendering-pipelines.md
+│   │   │       └── chapter-10-sensor-simulation-unity.md
 │   │   ├── module-3-ai-robot-brain/
+│   │   │   ├── index.md
+│   │   │   ├── week-6-nvidia-isaac-sim/
+│   │   │   │   ├── chapter-11-isaac-sim-architecture.md
+│   │   │   │   └── chapter-12-photorealistic-environments.md
+│   │   │   ├── week-7-isaac-ros-hardware-accelerated/
+│   │   │   │   ├── chapter-13-isaac-ros-vslam.md
+│   │   │   │   └── chapter-14-nav2-integration.md
+│   │   │   └── week-8-isaac-sim-reinforcement-learning/
+│   │   │       ├── chapter-15-isaac-gym-gpu-rl.md
+│   │   │       └── chapter-16-domain-randomization.md
 │   │   └── module-4-vision-language-action/
+│   │       ├── index.md
+│   │       ├── week-9-voice-to-action-with-openai-whisper/
+│   │       │   ├── chapter-17-whisper-speech-recognition.md
+│   │       │   └── chapter-18-voice-ros2-integration.md
+│   │       ├── week-10-cognitive-planning/
+│   │       │   ├── chapter-19-llm-cognitive-planning.md
+│   │       │   └── chapter-20-action-planning-safety.md
+│   │       ├── week-11-system-integration/
+│   │       │   ├── chapter-21-system-architecture.md
+│   │       │   └── chapter-22-vision-multimodal.md
+│   │       ├── week-12-advanced-deployment/
+│   │       │   ├── chapter-23-real-world-deployment.md
+│   │       │   └── chapter-24-learning-adaptation.md
+│   │       └── week-13-testing-validation/
+│   │           ├── chapter-25-testing-validation.md
+│   │           └── chapter-26-final-deployment.md
 │   ├── src/
 │   │   ├── components/            # React components
-│   │   │   ├── HomepageFeatures/
 │   │   │   └── RagChatbot/        # Floating chatbot widget
 │   │   ├── services/api/          # API integration layer
 │   │   ├── pages/                 # Custom pages
 │   │   ├── theme/                 # Theme customization
+│   │   │   ├── Layout.jsx         # Custom layout wrapper
+│   │   │   └── DocItem/           # Custom doc item theme
 │   │   ├── css/                   # Global styles
 │   │   └── utils/                 # Utility functions
 │   ├── static/                    # Static assets
@@ -208,7 +280,7 @@ hackathon_textbook_ai_robotics/
 │   ├── adr/                       # Architecture Decision Records
 │   └── prompts/                   # Prompt History Records
 │       ├── constitution/          # Constitution-related prompts
-│       ├── general/               # General prompts
+│       ├─ general/               # General prompts
 │       └── [feature-name]/        # Feature-specific prompts
 │
 ├── .specify/                      # Spec-Kit Plus configuration

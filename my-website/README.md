@@ -28,20 +28,64 @@ Interactive textbook platform featuring a comprehensive 13-week curriculum in Ph
 
 ```
 my-website/
-├── docs/                          # Textbook content (Markdown)
+├── docs/                          # Textbook content (26 chapters)
 │   ├── intro.md
 │   ├── quickstart.md
 │   ├── module-1-robotic-nervous-system/
+│   │   ├── index.md
+│   │   ├── week-1-introduction-to-physical-ai/
+│   │   │   ├── chapter-1-what-is-physical-ai.md
+│   │   │   └── chapter-2-lidar-imu-sensors.md
+│   │   ├── week-2-ros-2-fundamentals/
+│   │   │   ├── chapter-3-nodes-topics.md
+│   │   │   └── chapter-4-services-packages.md
+│   │   └── week-3-python-agent-integration/
+│   │       ├── chapter-5-python-agent-integration.md
+│   │       └── chapter-6-urdf-xacro-modeling.md
 │   ├── module-2-digital-twin/
+│   │   ├── index.md
+│   │   ├── week-4-physics-simulation-in-gazebo/
+│   │   │   ├── chapter-7-physics-simulation-fundamentals.md
+│   │   │   └── chapter-8-gazebo-ros2-integration.md
+│   │   └── week-5-high-fidelity-rendering-in-unity/
+│   │       ├── chapter-9-unity-rendering-pipelines.md
+│   │       └── chapter-10-sensor-simulation-unity.md
 │   ├── module-3-ai-robot-brain/
+│   │   ├── index.md
+│   │   ├── week-6-nvidia-isaac-sim/
+│   │   │   ├── chapter-11-isaac-sim-architecture.md
+│   │   │   └── chapter-12-photorealistic-environments.md
+│   │   ├── week-7-isaac-ros-hardware-accelerated/
+│   │   │   ├── chapter-13-isaac-ros-vslam.md
+│   │   │   └── chapter-14-nav2-integration.md
+│   │   └── week-8-isaac-sim-reinforcement-learning/
+│   │       ├── chapter-15-isaac-gym-gpu-rl.md
+│   │       └── chapter-16-domain-randomization.md
 │   └── module-4-vision-language-action/
+│       ├── index.md
+│       ├── week-9-voice-to-action-with-openai-whisper/
+│       │   ├── chapter-17-whisper-speech-recognition.md
+│       │   └── chapter-18-voice-ros2-integration.md
+│       ├── week-10-cognitive-planning/
+│       │   ├── chapter-19-llm-cognitive-planning.md
+│       │   └── chapter-20-action-planning-safety.md
+│       ├── week-11-system-integration/
+│       │   ├── chapter-21-system-architecture.md
+│       │   └── chapter-22-vision-multimodal.md
+│       ├── week-12-advanced-deployment/
+│       │   ├── chapter-23-real-world-deployment.md
+│       │   └── chapter-24-learning-adaptation.md
+│       └── week-13-testing-validation/
+│           ├── chapter-25-testing-validation.md
+│           └── chapter-26-final-deployment.md
 ├── src/
 │   ├── components/
-│   │   ├── HomepageFeatures/      # Landing page components
 │   │   └── RagChatbot/            # Floating chatbot widget
 │   ├── services/api/              # API integration layer
 │   ├── pages/                     # Custom pages
 │   ├── theme/                     # Theme customization
+│   │   ├── Layout.jsx             # Custom layout wrapper
+│   │   └── DocItem/               # Custom doc item theme
 │   ├── css/                       # Global styles
 │   └── utils/                     # Utility functions
 ├── static/                        # Static assets (images, favicon)
