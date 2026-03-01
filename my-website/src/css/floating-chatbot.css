@@ -51,14 +51,15 @@
   border-radius: 8px;
   overflow: hidden;
   opacity: 0;
+  pointer-events: none;
   transform: translateY(20px);
 }
 
 .floating-chatbot-container.visible {
   opacity: 1;
+  pointer-events: all;
   transform: translateY(0);
 }
-
 /* Close button for the chatbot */
 .floating-chatbot-close {
   position: absolute;

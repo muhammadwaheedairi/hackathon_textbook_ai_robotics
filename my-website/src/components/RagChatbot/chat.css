@@ -51,15 +51,16 @@
   flex-direction: column;
   overflow: hidden;
   opacity: 0;
+  pointer-events: none;
   transform: translateY(20px);
   transition: all 0.3s ease;
 }
 
 .chat-container.visible {
   opacity: 1;
+  pointer-events: all;
   transform: translateY(0);
 }
-
 /* Chat header styles */
 .chat-header {
   background-color: #000000;
