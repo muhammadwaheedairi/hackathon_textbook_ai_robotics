@@ -1,8 +1,8 @@
 ---
-title: "Muhammad Waheed — AI & Robotics Educator"
+title: "Muhammad Waheed AI & Robotics Educator"
 authors: [muhammadwaheed]
 tags: [author, ai, robotics, education]
-description: "Muhammad Waheed — Creator of the AI-Native Textbook for Physical AI & Humanoid Robotics"
+description: "Muhammad Waheed Creator of the AI-Native Textbook for Physical AI & Humanoid Robotics"
 ---
 
 # Muhammad Waheed
