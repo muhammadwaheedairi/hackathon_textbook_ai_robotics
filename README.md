@@ -112,13 +112,18 @@ This project is an AI-native textbook platform built for **Hackathon I** at Pana
 
 ### Frontend Features
 
-- **📚 Interactive Textbook** - Rich Markdown content with code highlighting
-- **🤖 Floating AI Chatbot** - Always-accessible RAG chatbot widget
-- **🎨 Modern UI/UX** - Clean, professional design with dark mode
-- **📱 Fully Responsive** - Optimized for mobile, tablet, and desktop
-- **♿ Accessibility** - WCAG AA compliant with keyboard navigation
-- **🔍 Search Functionality** - Built-in Docusaurus search
-- **📊 Module Navigation** - Structured sidebar with progress tracking
+- **📚 Interactive Textbook** - 26 chapters with rich Markdown content and code highlighting
+- **🤖 Floating AI Chatbot** - Always-accessible RAG chatbot widget for instant Q&A
+- **🔍 Offline Search** - Client-side search with instant results using local indexing
+- **🌐 Urdu Translation** - Real-time page translation to Urdu with one-click toggle
+- **🤖 AI Integration** - Direct integration with Claude and ChatGPT for page-specific questions
+- **📋 Smart Copy** - Copy entire pages or view as Markdown with dropdown options
+- **🎨 Modern UI/UX** - Redesigned homepage with hero, stats, module cards, and features
+- **🌙 Dark Mode Default** - Beautiful dark theme by default with light mode toggle
+- **📱 Fully Responsive** - Optimized for mobile, tablet, and desktop with touch-friendly controls
+- **♿ Accessibility** - WCAG AA compliant with keyboard navigation and screen reader support
+- **🔍 Enhanced Search** - Search bar with keyboard shortcuts and highlighted results
+- **💻 Code Highlighting** - VS Dark theme supporting 6+ programming languages
 
 ### Backend Features
 
@@ -314,6 +319,8 @@ hackathon_textbook_ai_robotics/
 | Node.js | ≥20.0 | Runtime environment |
 | Infima CSS | Latest | Styling framework |
 | MDX | 3.0.0 | Markdown with JSX |
+| @easyops-cn/docusaurus-search-local | 0.55.1 | Offline search plugin |
+| Lodash | 4.17.21 | Utility library |
 
 ### Backend Stack
 

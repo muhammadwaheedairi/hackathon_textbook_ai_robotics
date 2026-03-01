@@ -15,12 +15,17 @@ Interactive textbook platform featuring a comprehensive 13-week curriculum in Ph
 
 ### Key Features
 
-- **📖 Comprehensive Curriculum** - 4 modules covering ROS 2, Gazebo, NVIDIA Isaac, and VLA systems
+- **📖 Comprehensive Curriculum** - 26 chapters across 4 modules covering ROS 2, Gazebo, NVIDIA Isaac, and VLA systems
 - **🤖 AI-Powered Chatbot** - Floating RAG chatbot widget for instant answers
-- **🎨 Modern UI/UX** - Responsive design with dark mode support
+- **🔍 Offline Search** - Client-side search with @easyops-cn/docusaurus-search-local plugin
+- **🌐 Urdu Translation** - Real-time page translation to Urdu using MyMemory API
+- **🤖 AI Integration** - One-click "Open in Claude" and "Open in ChatGPT" with page content
+- **📋 Copy Page** - Copy entire page content or view as Markdown
+- **🎨 Modern UI/UX** - Completely redesigned homepage with dark mode by default
 - **♿ Accessibility** - WCAG-compliant with keyboard navigation
 - **📱 Mobile-First** - Fully responsive across all devices
 - **🚀 Fast Performance** - Static site generation with optimized assets
+- **💻 Enhanced Code Highlighting** - VS Dark theme with 6+ programming languages
 
 ---
 
@@ -110,6 +115,8 @@ my-website/
 | Node.js | ≥20.0 | Runtime environment |
 | Infima CSS | Latest | Styling framework |
 | MDX | 3.0.0 | Markdown with JSX |
+| @easyops-cn/docusaurus-search-local | 0.55.1 | Offline search plugin |
+| Lodash | 4.17.21 | Utility library |
 
 ---
 
@@ -140,7 +147,58 @@ Deploy to GitHub Pages using the built-in deployment command. Ensure you have pr
 
 ## 🎨 Key Components
 
-### ChatWidget Component
+### 1. Redesigned Homepage
+**Location:** `src/pages/index.tsx`
+
+Completely redesigned landing page with modern, professional design.
+
+**Sections:**
+- **Hero Section** - Eye-catching hero with curriculum stats (4 modules, 13 weeks, 26 chapters, 100+ code examples)
+- **Tech Strip** - Visual showcase of 10 technologies covered (ROS 2, Gazebo, NVIDIA Isaac, Unity, etc.)
+- **Module Cards** - Interactive cards for each of the 4 modules with detailed descriptions and topics
+- **Features Section** - 6 feature cards highlighting textbook benefits
+- **CTA Section** - Call-to-action encouraging users to start learning
+
+### 2. Custom DocItem Layout
+**Location:** `src/theme/DocItem/Layout/index.tsx`
+
+Enhanced documentation page layout with powerful productivity features.
+
+**Features:**
+
+**Urdu Translation Button**
+- Real-time translation of page content to Urdu
+- Uses MyMemory Translation API
+- Preserves code blocks and formatting
+- Toggle between English and Urdu
+- Loading state with Urdu text
+
+**Copy Page Button**
+- One-click copy of entire page content to clipboard
+- Visual feedback on successful copy
+- Useful for offline reading or note-taking
+
+**AI Integration Dropdown**
+- **View as Markdown** - Opens page content in new tab as plain text
+- **Open in Claude** - Launches Claude.ai with page content pre-filled for Q&A
+- **Open in ChatGPT** - Launches ChatGPT with page content pre-filled for Q&A
+- Automatically truncates content to 3000 characters for API limits
+
+### 3. Offline Search Plugin
+**Location:** `docusaurus.config.ts`
+
+Client-side search functionality using @easyops-cn/docusaurus-search-local.
+
+**Configuration:**
+- Hashed index for better performance
+- Indexes all documentation pages
+- Search bar positioned on right side
+- Keyboard shortcut hints enabled
+- Shows 8 results with 50-character context
+- Highlights search terms on target pages
+- Explicit search result paths
+
+### 4. ChatWidget Component
 **Location:** `src/components/RagChatbot/ChatWidget.tsx`
 
 Floating AI chatbot providing instant answers about textbook content.
@@ -153,15 +211,17 @@ Floating AI chatbot providing instant answers about textbook content.
 - Mobile-responsive design
 - Accessibility support
 
-### Homepage Component
-**Location:** `src/pages/index.tsx`
+### 5. Theme Customization
 
-Landing page featuring hero section, feature cards, and module overview with navigation to curriculum content.
+**Dark Mode by Default**
+- Default color mode set to dark
+- Respects user's system preferences
+- Toggle available for light mode
 
-### Custom Layout
-**Location:** `src/theme/Layout.jsx`
-
-Custom layout wrapper that integrates the floating chatbot widget across all pages.
+**Enhanced Code Highlighting**
+- VS Dark theme for code blocks
+- Support for 6+ languages: bash, python, yaml, cpp, csharp, typescript
+- Consistent syntax highlighting across light and dark modes
 
 ---
 
