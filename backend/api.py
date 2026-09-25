@@ -75,7 +75,7 @@ async def ask_rag(request: QueryRequest):
             raise HTTPException(status_code=400, detail="Query too long, maximum 2000 characters")
 
         # Process query through RAG agent
-        response = rag_agent.query_agent(request.query)
+        response = await rag_agent.query_agent(request.query)
 
         # Return only answer
         return QueryResponse(
